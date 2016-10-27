@@ -3,5 +3,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class MoviesConfig(AppConfig):
-    name = 'movies'
+class SuggesterConfig(AppConfig):
+    name = 'suggester'
