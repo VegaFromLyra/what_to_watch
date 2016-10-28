@@ -9,7 +9,7 @@ class User(models.Model):
     return self.username
 
 class Content(models.Model):
-  name = models.CharField
+  name = models.CharField(max_length=200, default='no_name')
   type = models.CharField(max_length=200)
   user = models.ForeignKey(User)
 
