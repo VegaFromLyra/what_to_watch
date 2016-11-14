@@ -1,1 +1,17 @@
-<h1> Suggest a movie! </h1>
+{% extends 'bootstrap3/bootstrap3.html' %}
+
+{% load static %}
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and Javascript #}
+{% bootstrap_css %}
+
+{% block bootstrap3_content %}
+
+  <div class="container">
+    <img src = "{% static "suggester/landing.jpeg" %}" class="img-responsive" alt="Landing image"/>
+  </div>
+
+{% endblock %}
