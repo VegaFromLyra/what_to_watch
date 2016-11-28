@@ -1,11 +1,11 @@
-{% extends 'bootstrap3/bootstrap3.html' %}
+<head>
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+</head>
 
 {% load static %}
 
-{# Load the tag library #}
 {% load bootstrap3 %}
 
-{# Load CSS and Javascript #}
 {% bootstrap_css %}
 
 {% block bootstrap3_content %}
