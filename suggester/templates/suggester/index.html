@@ -5,6 +5,12 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
+  <script type = "text/javascript">
+    function in_progress() {
+      return confirm("{{ message }}")
+    }
+  </script>
+
   {% load static %}
 
   {% load bootstrap3 %}
@@ -20,10 +26,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <img
-          src="{% static "suggester/landing.jpeg" %}"
-          class="center-block img-responsive"
-          alt="Landing image"/>
+        <a href="/suggester/suggest" onclick="return in_progress()">
+          <img
+            src="{% static "suggester/landing.jpeg" %}"
+            class="center-block img-responsive"
+            alt="Landing image"/>
+        </a>
       </div>
     </div>
   </div>
