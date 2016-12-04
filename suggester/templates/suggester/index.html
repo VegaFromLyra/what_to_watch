@@ -1,17 +1,32 @@
-<head>
-    <title>{% block title %}{{ title }}{% endblock %}</title>
-</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>{% block title %}{{ title }}{% endblock %}</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
 
-{% load static %}
+  {% load static %}
 
-{% load bootstrap3 %}
+  {% load bootstrap3 %}
 
-{% bootstrap_css %}
+  {% bootstrap_css %}
 
-{% block bootstrap3_content %}
+  <link rel ="stylesheet" type="text/css" href="{% static 'suggester/style.css' %}" /> 
+
+  {% block bootstrap3_content %}
+
+  <div class="help-block"></div>
 
   <div class="container">
-    <img src = "{% static "suggester/landing.jpeg" %}" class="img-responsive" alt="Landing image"/>
+    <div class="row">
+      <div class="col-md-12">
+        <img
+          src="{% static "suggester/landing.jpeg" %}"
+          class="center-block img-responsive"
+          alt="Landing image"/>
+      </div>
+    </div>
   </div>
 
-{% endblock %}
+  {% endblock %}
+</html>
