@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
   url(r'^$', views.index, name='index'),
-  url(r'^suggester/suggest/', views.index, name='index')
+  url(r'^suggest/', views.suggester, name='suggester')
 ]
