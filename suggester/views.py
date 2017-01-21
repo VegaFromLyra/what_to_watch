@@ -1,14 +1,13 @@
 from django.shortcuts import render
 
-def index(request):
-  context = {
-    'message': 'In progress...check back soon!'
-  }
-  return render(request, 'suggester/index.html', context)
+import random
 
-def suggester(request):
-  context = {
-    'image_source': 'suggester/mock_content.jpeg'
-  }
+def content(request):
+  if random.randint(0, 1) == 0:
+    path = 'suggester/landing.jpeg'
+  else:
+    path = 'suggester/mock_content.jpeg'
+
+  context = { 'image_source': path }
 
   return render(request, 'suggester/content.html', context)

@@ -1,32 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-      <title>{% block title %} What do you want to watch? {% endblock %}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
+{% extends "base.html" %}
+{% load staticfiles %}
 
-  {% load static %}
+{% block stylesheets%}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static "css/content.css" %}">
+{% endblock stylesheets %}
 
-  {% load bootstrap3 %}
-
-  {% bootstrap_css %}
-
-  <link rel ="stylesheet" type="text/css" href="{% static 'suggester/style.css' %}" />
+{% block content %}
 
   {% block bootstrap3_content %}
 
-  <div class="help-block"></div>
+    <div class="help-block"></div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <img
-          src="{% static image_source %}"
-          class="center-block img-responsive"
-          alt="Content image"/>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <a href="{% url 'content' %}">
+            <img
+              src="{% static image_source %}"
+              class="center-block img-responsive"
+              alt="content image"/>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
 
   {% endblock %}
-</html>
+
+{% endblock content %}
