@@ -11,19 +11,19 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import json
+
+from unipath import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).ancestor(3) # Returns the 3rd parent directory
+CONFIG_ROOT = BASE_DIR.child("what_to_watch")
+SETTINGS_ROOT = CONFIG_ROOT.child("settings")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'r0(8d0=zonm)i^w(+8gd^h!^=a$po-5r15y7!ufm*os8tr7@3!'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -118,3 +118,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+from django.core.exceptions import ImproperlyConfigured
+
+
+with open("{0}/secrets.json".format(SETTINGS_ROOT)) as secrets_file:
+    secrets = json.loads(secrets_file.read())
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+            error_message = "Set the {0} environment variable".format(setting)
+            raise ImproperlyConfigured(error_message)
+
+SECRET_KEY = get_secret("SECRET_KEY")
+MOVIE_DB_KEY = get_secret("MOVIE_DB_KEY")
+MOVIE_DB_URL = "https://api.themoviedb.org/3/discover/movie"
+
+
