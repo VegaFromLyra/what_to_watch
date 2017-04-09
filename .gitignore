@@ -3,5 +3,8 @@ env
 *.pyc
 __pycache__
 
+# No temp VIM files
+*.swp
+*.swo
 
 secrets.json
