@@ -136,5 +136,4 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = get_secret("SECRET_KEY")
 MOVIE_DB_KEY = get_secret("MOVIE_DB_KEY")
 MOVIE_DB_URL = "https://api.themoviedb.org/3/discover/movie"
-
-
+CONFIG_URL = "https://api.themoviedb.org/3/configuration"
