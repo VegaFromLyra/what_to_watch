@@ -20,6 +20,23 @@ BASE_DIR = Path(__file__).ancestor(3) # Returns the 3rd parent directory
 CONFIG_ROOT = BASE_DIR.child("what_to_watch")
 SETTINGS_ROOT = CONFIG_ROOT.child("settings")
 
+from django.core.exceptions import ImproperlyConfigured
+
+with open("{0}/secrets.json".format(SETTINGS_ROOT)) as secrets_file:
+    secrets = json.loads(secrets_file.read())
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_message = "Set the {0} environment variable".format(setting)
+        raise ImproperlyConfigured(error_message)
+
+DATABASE_PASS = get_secret("DATABASE_PASS")
+SECRET_KEY = get_secret("SECRET_KEY")
+MOVIE_DB_KEY = get_secret("MOVIE_DB_KEY")
+MOVIE_DB_URL = "https://api.themoviedb.org/3/discover/movie"
+CONFIG_URL = "https://api.themoviedb.org/3/configuration"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -120,20 +137,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-from django.core.exceptions import ImproperlyConfigured
-
-
-with open("{0}/secrets.json".format(SETTINGS_ROOT)) as secrets_file:
-    secrets = json.loads(secrets_file.read())
-
-def get_secret(setting, secrets=secrets):
-    try:
-        return secrets[setting]
-    except KeyError:
-            error_message = "Set the {0} environment variable".format(setting)
-            raise ImproperlyConfigured(error_message)
-
-SECRET_KEY = get_secret("SECRET_KEY")
-MOVIE_DB_KEY = get_secret("MOVIE_DB_KEY")
-MOVIE_DB_URL = "https://api.themoviedb.org/3/discover/movie"
-CONFIG_URL = "https://api.themoviedb.org/3/configuration"
