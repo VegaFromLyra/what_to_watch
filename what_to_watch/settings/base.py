@@ -32,6 +32,7 @@ def get_secret(setting, secrets=secrets):
         error_message = "Set the {0} environment variable".format(setting)
         raise ImproperlyConfigured(error_message)
 
+DATABASE_USER = get_secret("DATABASE_USER")
 DATABASE_PASS = get_secret("DATABASE_PASS")
 SECRET_KEY = get_secret("SECRET_KEY")
 MOVIE_DB_KEY = get_secret("MOVIE_DB_KEY")
@@ -62,8 +63,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'what_to_watch_db',
-        'USER': 'root',
-        'PASSWORD': 'sunshine13'
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASS
     }
 }
 
